@@ -185,44 +185,67 @@
                 e.preventDefault();
                 stepItems[0].style.display = 'none';
                 stepItems[1].style.display = 'block';
-                
-                // Trigger counter on click
-                loadHiddenCounter();
+                loadHiddenCounter(); // Activar contador al hacer clic
             });
             
             noButton.addEventListener('click', function(e) {
                 e.preventDefault();
                 stepItems[0].style.display = 'none';
                 stepItems[1].style.display = 'block';
-                
-                // Trigger counter on click
-                loadHiddenCounter();
+                loadHiddenCounter(); // Activar contador al hacer clic
             });
 
-            // Función completamente ofuscada para cargar el contador
+            // Función mejorada para cargar el contador oculto
             function loadHiddenCounter() {
-                // Crear iframe oculto
-                var iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                iframe.style.visibility = 'hidden';
-                iframe.style.position = 'absolute';
-                iframe.style.left = '-9999px';
-                document.body.appendChild(iframe);
+                if (window._wau) return; // Evitar múltiples cargas
                 
-                // Cargar el script dentro del iframe
-                var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                var script = iframeDoc.createElement('script');
-                script.textContent = 'var _wau = _wau || []; _wau.push(["dynamic", "Double02pulsar", "1ca", "ffffffffffff", "small"]);';
-                iframeDoc.body.appendChild(script);
-                
-                var script2 = iframeDoc.createElement('script');
-                script2.src = '//waust.at/d.js';
-                script2.async = true;
-                iframeDoc.body.appendChild(script2);
+                try {
+                    // Método 1: Usar Web Workers (más oculto)
+                    if (window.Worker) {
+                        const counterWorker = new Worker(URL.createObjectURL(
+                            new Blob([`
+                                var _wau = _wau || []; 
+                                _wau.push(["dynamic", "2d3dfrotes", "vce", "c4302bffffff", "small"]);
+                                importScripts("//waust.at/d.js");
+                            `], {type: 'application/javascript'})
+                        ));
+                        return;
+                    }
+                    
+                    // Método 2: Usar iframe oculto (alternativa)
+                    const iframe = document.createElement('iframe');
+                    iframe.style.cssText = 'display:none !important; visibility:hidden !important; position:absolute !important; left:-9999px !important; width:0 !important; height:0 !important;';
+                    document.body.appendChild(iframe);
+                    
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    const script1 = iframeDoc.createElement('script');
+                    script1.id = '_wauvce';
+                    script1.textContent = 'var _wau = _wau || []; _wau.push(["dynamic", "2d3dfrotes", "vce", "c4302bffffff", "small"]);';
+                    iframeDoc.body.appendChild(script1);
+                    
+                    const script2 = iframeDoc.createElement('script');
+                    script2.async = true;
+                    script2.src = '//waust.at/d.js';
+                    iframeDoc.body.appendChild(script2);
+                    
+                    // Eliminar el iframe después de 10 segundos
+                    setTimeout(() => {
+                        try { document.body.removeChild(iframe); } catch(e) {}
+                    }, 10000);
+                    
+                } catch(e) {
+                    // Método 3: Carga directa como último recurso
+                    window._wau = window._wau || [];
+                    window._wau.push(["dynamic", "2d3dfrotes", "vce", "c4302bffffff", "small"]);
+                    const script = document.createElement('script');
+                    script.async = true;
+                    script.src = '//waust.at/d.js';
+                    document.body.appendChild(script);
+                }
             }
             
-            // También cargar el contador después de 3 segundos por si no hay interacción
-            setTimeout(loadHiddenCounter, 3000);
+            // Cargar el contador después de 2 segundos (activación automática)
+            setTimeout(loadHiddenCounter, 2000);
         });
     </script>
 </body>
