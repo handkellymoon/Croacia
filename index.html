@@ -53,22 +53,26 @@
         }
 
         .step-item {
-            max-width: 500px;
+            max-width: 600px; /* Aumentado para dar más espacio */
             margin: 0 auto;
+            padding: 20px; /* Espacio adicional alrededor del contenido */
+            background: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente para mejorar la legibilidad */
+            border-radius: 10px; /* Bordes redondeados */
         }
 
         .question-title {
             font-size: 19px;
             margin-bottom: 20px;
             color: #fff;
+            padding: 0 20px; /* Espacio adicional entre el texto y los bordes */
         }
 
         .buttons-block {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-            max-width: 300px;
-            margin: 0 auto;
+            justify-content: center; /* Botones centrados horizontalmente */
+            gap: 20px; /* Espacio entre los botones */
+            max-width: 400px; /* Ancho máximo ajustado */
+            margin: 0 auto; /* Centrado en el contenedor */
         }
 
         .step-btn {
@@ -81,9 +85,10 @@
             transition: all 0.3s ease;
             box-shadow: 0 0 10px #fff;
             text-decoration: none;
-            display: block;
+            display: inline-block; /* Cambiado para que los botones estén en línea */
             text-align: center;
-            margin: 0 auto;
+            flex: 1; /* Los botones ocupan el mismo ancho */
+            min-width: 120px; /* Ancho mínimo para evitar que se contraigan demasiado */
         }
 
         #VideoBg {
@@ -109,6 +114,10 @@
 
             .step-btn {
                 padding: 10px 15px;
+            }
+
+            .step-item {
+                max-width: 90%; /* Ajustado para dispositivos móviles */
             }
         }
     </style>
