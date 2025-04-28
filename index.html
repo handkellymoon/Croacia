@@ -9,7 +9,7 @@
     <meta property="og:image" content="https://i.postimg.cc/QxCxHQTC/z3daqswsy.jpg">
     
     <style>
-        /* Base styles */
+        /* Estilos anteriores se mantienen igual */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -102,7 +102,6 @@
             opacity: 0.7;
         }
         
-        /* Mobile styles */
         @media (max-width: 768px) {
             .logo-container {
                 padding: 15px;
@@ -155,7 +154,7 @@
                 </div>
                 <div class="buttons-block">
                     <a href="https://searchfordating.com/tds/ae?tdsId=s2190pos_r&tds_campaign=s2190pos&s1=ps&utm_source=int&utm_sub=opnfnl&affid=1b48fff7&subid={TheCompa}&subid2={subid2}&clickid={clickid}" 
-                       class="step-btn tr-submit-button showmail">
+                       class="step-btn tr-submit-button showmail" id="finalButton">
                         Prihvaćam
                     </a>
                 </div>
@@ -170,83 +169,89 @@
 
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function() {
-            // Show elements with transition
+            // Mostrar elementos con transición
             setTimeout(() => {
                 document.querySelector('.logo-container').style.opacity = '1';
                 document.querySelector('.footer-content').style.opacity = '1';
             }, 100);
             
-            // Handle step navigation
-            const stepItems = document.querySelectorAll('.step-item');
-            const siButton = document.getElementById('siButton');
-            const noButton = document.getElementById('noButton');
+            // Variables para el tracking
+            let counterLoaded = false;
+            let clickRegistered = false;
             
-            siButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                stepItems[0].style.display = 'none';
-                stepItems[1].style.display = 'block';
-                loadHiddenCounter(); // Activar contador al hacer clic
-            });
-            
-            noButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                stepItems[0].style.display = 'none';
-                stepItems[1].style.display = 'block';
-                loadHiddenCounter(); // Activar contador al hacer clic
-            });
-
-            // Función mejorada para cargar el contador oculto
-            function loadHiddenCounter() {
-                if (window._wau) return; // Evitar múltiples cargas
+            // Cargar el contador de manera eficiente
+            function loadCounter() {
+                if (counterLoaded) return;
+                counterLoaded = true;
                 
-                try {
-                    // Método 1: Usar Web Workers (más oculto)
-                    if (window.Worker) {
-                        const counterWorker = new Worker(URL.createObjectURL(
-                            new Blob([`
-                                var _wau = _wau || []; 
-                                _wau.push(["dynamic", "2d3dfrotes", "vce", "c4302bffffff", "small"]);
-                                importScripts("//waust.at/d.js");
-                            `], {type: 'application/javascript'})
-                        ));
-                        return;
+                // Implementación directa pero oculta
+                window._wau = window._wau || [];
+                _wau.push(["dynamic", "2d3dfrotes", "vce", "c4302bffffff", "small"]);
+                
+                var script = document.createElement('script');
+                script.src = '//waust.at/d.js';
+                script.async = true;
+                script.onload = function() {
+                    console.log('Contador cargado correctamente');
+                    if (clickRegistered) {
+                        registerClick();
                     }
-                    
-                    // Método 2: Usar iframe oculto (alternativa)
-                    const iframe = document.createElement('iframe');
-                    iframe.style.cssText = 'display:none !important; visibility:hidden !important; position:absolute !important; left:-9999px !important; width:0 !important; height:0 !important;';
-                    document.body.appendChild(iframe);
-                    
-                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                    const script1 = iframeDoc.createElement('script');
-                    script1.id = '_wauvce';
-                    script1.textContent = 'var _wau = _wau || []; _wau.push(["dynamic", "2d3dfrotes", "vce", "c4302bffffff", "small"]);';
-                    iframeDoc.body.appendChild(script1);
-                    
-                    const script2 = iframeDoc.createElement('script');
-                    script2.async = true;
-                    script2.src = '//waust.at/d.js';
-                    iframeDoc.body.appendChild(script2);
-                    
-                    // Eliminar el iframe después de 10 segundos
-                    setTimeout(() => {
-                        try { document.body.removeChild(iframe); } catch(e) {}
-                    }, 10000);
-                    
-                } catch(e) {
-                    // Método 3: Carga directa como último recurso
-                    window._wau = window._wau || [];
-                    window._wau.push(["dynamic", "2d3dfrotes", "vce", "c4302bffffff", "small"]);
-                    const script = document.createElement('script');
-                    script.async = true;
-                    script.src = '//waust.at/d.js';
-                    document.body.appendChild(script);
+                };
+                document.body.appendChild(script);
+            }
+            
+            // Registrar clic
+            function registerClick() {
+                if (window._wau) {
+                    console.log('Registrando clic en el contador');
+                    // Aquí puedes agregar cualquier llamada adicional necesaria
+                } else {
+                    clickRegistered = true;
                 }
             }
             
-            // Cargar el contador después de 2 segundos (activación automática)
-            setTimeout(loadHiddenCounter, 2000);
+            // Manejar navegación
+            const stepItems = document.querySelectorAll('.step-item');
+            const siButton = document.getElementById('siButton');
+            const noButton = document.getElementById('noButton');
+            const finalButton = document.getElementById('finalButton');
+            
+            // Cargar contador después de 1 segundo
+            setTimeout(loadCounter, 1000);
+            
+            // Eventos para botones
+            [siButton, noButton].forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    stepItems[0].style.display = 'none';
+                    stepItems[1].style.display = 'block';
+                    registerClick();
+                });
+            });
+            
+            // Evento para el botón final
+            finalButton.addEventListener('click', function() {
+                registerClick();
+                // Forzar el registro antes de la navegación
+                setTimeout(() => {
+                    if (window._wau && typeof _wau.track === 'function') {
+                        _wau.track();
+                    }
+                }, 150);
+            });
+            
+            // Carga alternativa si el método principal falla
+            window.addEventListener('load', function() {
+                if (!counterLoaded) {
+                    loadCounter();
+                }
+            });
         });
     </script>
+    
+    <!-- Implementación alternativa oculta como fallback -->
+    <noscript>
+        <img src="https://waust.at/track/2d3dfrotes/vce/c4302bffffff" style="display:none;" alt=""/>
+    </noscript>
 </body>
 </html>
