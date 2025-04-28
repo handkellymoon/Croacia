@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Nove avanture u vašem susjedstvu</title>
+    <meta property="og:image" content="https://i.postimg.cc/QxCxHQTC/z3daqswsy.jpg">
+    
+    <style>
+        /* Base styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            overflow-x: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: #000;
+        }
+        
+        .logo-container {
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .logo-container img {
+            max-width: 200px;
+            height: auto;
+            filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 3.5px #fff);
+        }
+        
+        .footer-content {
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            padding: 20px;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .step-block {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .question-title {
+            font-size: 19px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .buttons-block {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .step-btn {
+            padding: 12px 20px;
+            border: 1px solid #fff;
+            background: transparent;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px #fff;
+            text-decoration: none;
+            display: block;
+        }
+        
+        #VideoBg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.7;
+        }
+        
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            .logo-container {
+                padding: 15px;
+            }
+            
+            .logo-container img {
+                max-width: 150px;
+            }
+            
+            .footer-content {
+                padding: 15px;
+            }
+            
+            .question-title {
+                font-size: 17px;
+            }
+            
+            .step-btn {
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top logo -->
+    <div class="logo-container">
+        <img src="https://i.imgur.com/sZdtUEq.png" alt="Logo" loading="lazy">
+    </div>
+    
+    <!-- Bottom content -->
+    <div class="footer-content">
+        <div class="step-block">
+            <div class="step-item" style="display: block;">
+                <div class="question-title">
+                    Želim ponuditi svoje usluge kod tebe kući ili u stanu. Želiš li me vidjeti?
+                </div>
+                <div class="buttons-block">
+                    <a href="#" class="step-btn tr-next-button tr-b-option" id="siButton">
+                        DA
+                    </a>
+                    <a href="#" class="step-btn tr-next-button tr-b-option" id="noButton">
+                        NE
+                    </a>
+                </div>
+            </div>
+            
+            <div class="step-item thishide" style="display: none;">
+                <div class="question-title">
+                    UPOZORENJE! Potrebna je diskrecija
+                </div>
+                <div class="buttons-block">
+                    <a href="https://searchfordating.com/tds/ae?tdsId=s2190pos_r&tds_campaign=s2190pos&s1=ps&utm_source=int&utm_sub=opnfnl&affid=1b48fff7&subid={TheCompa}&subid2={subid2}&clickid={clickid}" 
+                       class="step-btn tr-submit-button showmail">
+                        Prihvaćam
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <video autoplay muted loop id="VideoBg" playsinline>
+        <source src="https://cdn-dimi.akamaized.net/landings/288193/1714145726/images/video-4.mp4" type="video/mp4">
+        Vaš preglednik ne podržava video element.
+    </video>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show elements with transition
+            setTimeout(() => {
+                document.querySelector('.logo-container').style.opacity = '1';
+                document.querySelector('.footer-content').style.opacity = '1';
+            }, 100);
+            
+            // Handle step navigation
+            const stepItems = document.querySelectorAll('.step-item');
+            const siButton = document.getElementById('siButton');
+            const noButton = document.getElementById('noButton');
+            
+            siButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                stepItems[0].style.display = 'none';
+                stepItems[1].style.display = 'block';
+            });
+            
+            noButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                stepItems[0].style.display = 'none';
+                stepItems[1].style.display = 'block';
+            });
+        });
+    </script>
+
+    <script id="_wau1ca">var _wau = _wau || []; _wau.push(["dynamic", "Double02pulsar", "1ca", "ffffffffffff", "small"]);</script><script async src="//waust.at/d.js"></script>
+</body>
+</html>
